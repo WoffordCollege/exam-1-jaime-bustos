@@ -114,8 +114,25 @@ public class ConnectFour {
     public Location getTopOfColumn(int column) {
         // Question 1
         // TODO
+
+        String sCol = getColumnAsString(column);
+
+        int sColLength = sCol.length();
+
+        if (sColLength == 0) {
+            return Location.EMPTY;
+        }
+
+        char c = sCol.charAt(sColLength - 1);
+
+        if (c == 'R') {
+            return Location.RED;
+        } else if (c == 'B') {
+            return Location.BLACK;
+        } else {
+            return Location.EMPTY;
+        }
         
-        return Location.EMPTY;
     }
     
     /**
@@ -129,8 +146,12 @@ public class ConnectFour {
     public int getHeightOfColumn(int column) {
         // Question 2
         // TODO
+
+        String sCol = getColumnAsString(column);
+
+        int sColLength = sCol.length();
         
-        return 0;
+        return sColLength;
     }
     
     /**
@@ -146,6 +167,19 @@ public class ConnectFour {
     public void dropToken(int column) {
         // Question 3
         // TODO
+
+        if (getHeightOfColumn(column) < 0 || getHeightOfColumn(column) > 6) {
+            throw new ColumnFullException();
+        } else {
+            int row = getHeightOfColumn(column);
+            if (redTurn == true) {
+                setLocation(row, column, Location.RED);
+                redTurn = false;
+            } else if (redTurn == false) {
+                setLocation(row, column, Location.BLACK);
+                redTurn = true;
+            }
+        }
         
     }
     
@@ -170,6 +204,8 @@ public class ConnectFour {
         //       along a column.
         
         // TODO
+
+
         
         return Result.NONE;
     }
@@ -193,6 +229,8 @@ public class ConnectFour {
     public String toString() {
         // Question 5
         // TODO
+
+
         
         return "";
     }
